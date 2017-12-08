@@ -5,39 +5,79 @@
  */
 
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { View, Image, Dimensions } from 'react-native';
+import { DrawerNavigator, DrawerItems } from 'react-navigation';
 
-import Input from '../src/input/Input';
+import Components from './src/drawer/components';
+import Ratings from './src/drawer/ratings';
+import Pricing from './src/drawer/pricing';
+import Login from './src/drawer/login';
+import Profile from './src/drawer/profile';
+import Lists from './src/drawer/lists';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
+const CustomDrawerContentComponent = props => (
+  <View style={{ flex: 1, backgroundColor: '#43484d' }}>
+    <View
+      style={{ marginTop: 40, justifyContent: 'center', alignItems: 'center' }}
+    >
+      <Image
+        source={require('./src/images/logo.png')}
+        style={{ width: SCREEN_WIDTH * 0.57 }}
+        resizeMode="contain"
+      />
+    </View>
+    <View style={{marginLeft: 10}}>
+      <DrawerItems {...props} />
+    </View>
+  </View>
+);
+
+const MainRoot = DrawerNavigator(
+  {
+    Profile: {
+      path: '/profile',
+      screen: Profile
+    },
+    Lists: {
+      path: '/lists',
+      screen: Lists
+    },
+    Components: {
+      path: '/components',
+      screen: Components,
+    },
+    Ratings: {
+      path: '/ratings',
+      screen: Ratings,
+    },
+    Pricing: {
+      path: '/pricing',
+      screen: Pricing,
+    }
+  },
+  {
+    initialRouteName: 'Pricing',
+    contentOptions: {
+      activeTintColor: '#548ff7',
+      activeBackgroundColor: 'transparent',
+      inactiveTintColor: '#ffffff',
+      inactiveBackgroundColor: 'transparent',
+      labelStyle: {
+        fontSize: 15,
+        marginLeft: 0,
+      },
+    },
+    drawerWidth: SCREEN_WIDTH * 0.8,
+    contentComponent: CustomDrawerContentComponent,
+  }
+);
 
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
-        <Input />
-      </View>
+      <MainRoot />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
