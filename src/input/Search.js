@@ -152,16 +152,8 @@ Search.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-    borderTopColor: '#000',
-    backgroundColor: colors.grey0,
   },
   containerLight: {
-    backgroundColor: colors.grey5,
-    borderTopColor: '#e1e1e1',
-    borderBottomColor: '#e1e1e1',
   },
   icon: {
     backgroundColor: 'transparent',
@@ -208,6 +200,8 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     left: 16,
+    height: 20, 
+    width: 20
   },
   clearIcon: {
     right: 16,
